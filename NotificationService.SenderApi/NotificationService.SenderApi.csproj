@@ -21,5 +21,10 @@
       <HintPath>..\..\..\.nuget\packages\microsoft.azure.servicebus\0.0.2-preview\lib\netstandard1.3\Microsoft.Azure.ServiceBus.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>
