@@ -29,10 +29,10 @@ namespace NotificationService.SenderApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerInstatiator loggerInstatiator)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerInstatiator.AddConsole(Configuration.GetSection("Logging"));
-            loggerInstatiator.AddDebug();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
 
             app.UseDeveloperExceptionPage();
 
