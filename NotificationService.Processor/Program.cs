@@ -10,7 +10,7 @@ namespace NotificationService.Processor
 {
     internal class Program
     {
-        private static NotificationSenderFactory _notificationSenderFactory;
+        private static NotificationSenderInstatiator _notificationSenderInstatiator;
 
         private const string ServiceBusConnectionString = "Endpoint=sb://notificationsvc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=NDQRlMHoRDR2CRp4Bds/N9Tyx532k8+4fiWbsvfwn+U=";
         private const string QueueName = "notifications";
@@ -26,7 +26,7 @@ namespace NotificationService.Processor
                     {
                         var notificationToSend = JsonConvert.DeserializeObject<NotificationToSend>(Encoding.UTF8.GetString(message.Body));
 
-                        var notificationSender = _notificationSenderFactory
+                        var notificationSender = _notificationSenderInstatiator
                             .GetNotificationSender(notificationToSend.NotificationType);
 
                         if (notificationSender != null)
@@ -57,7 +57,7 @@ namespace NotificationService.Processor
             var serviceCollection = new ServiceCollection();
             //wire up services here
 
-            _notificationSenderFactory = new NotificationSenderFactory(serviceCollection);
+            _notificationSenderInstatiator = new NotificationSenderInstatiator(serviceCollection);
 
             ReceiveMessages()
                 .GetAwaiter()
